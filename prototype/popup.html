@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTune</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { width: 360px; margin: 0; padding: 16px; background: #101317; color: #f4f7fb; }
+    h1 { font-size: 20px; margin: 0; }
+    .subtitle { color: #9ca9b8; font-size: 12px; margin: 4px 0 14px; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 10px 0; }
+    .status { padding: 8px; border-radius: 8px; background: #192129; color: #b9c7d5; font-size: 12px; }
+    .status.good { color: #9de6b0; }
+    .status.warn { color: #ffd38a; }
+    button, select { background: #273441; border: 1px solid #405465; color: #fff; border-radius: 6px; padding: 7px 9px; }
+    button:hover { background: #344658; cursor: pointer; }
+    .bands { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 14px 0; }
+    .band { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #aebdcc; font-size: 10px; }
+    input[type=range] { writing-mode: vertical-lr; direction: rtl; height: 116px; width: 24px; accent-color: #6ba6ff; }
+    .db { color: #fff; font-size: 10px; min-height: 12px; }
+    .footer { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1>YouTune</h1>
+  <div class="subtitle">Personal listening tuner for YouTube</div>
+  <div id="status" class="status">Checking player...</div>
+  <div class="row">
+    <label for="preset">Preset</label>
+    <select id="preset" aria-label="Choose an EQ preset"></select>
+  </div>
+  <div id="presetDescription" class="subtitle"></div>
+  <div class="row">
+    <label for="enabled">Processing</label>
+    <input id="enabled" type="checkbox" checked>
+  </div>
+  <div class="row">
+    <label for="preamp">Preamp <span id="preampValue">0 dB</span></label>
+    <input id="preamp" type="range" min="-12" max="6" step="0.5" value="0">
+  </div>
+  <div id="bands" class="bands"></div>
+  <div class="footer">
+    <button id="bypass">Bypass</button>
+    <button id="reconnect">Reconnect</button>
+    <button id="reset">Reset</button>
+  </div>
+  <script src="presets.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

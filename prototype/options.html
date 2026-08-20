@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTune settings</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { max-width: 720px; margin: 40px auto; padding: 0 20px; background: #101317; color: #eef3f8; }
+    .card { background: #192129; border: 1px solid #2e3c48; border-radius: 10px; padding: 20px; margin: 16px 0; }
+    h1 { margin-bottom: 4px; }
+    p { color: #b9c7d5; line-height: 1.5; }
+    label { display: block; margin: 14px 0; }
+    input, button { margin-right: 8px; }
+    button { background: #273441; border: 1px solid #405465; color: #fff; border-radius: 6px; padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h1>YouTune settings</h1>
+  <p>These settings are local to this browser profile. YouTune does not upload audio or require an account.</p>
+  <section class="card">
+    <h2>Safety</h2>
+    <label><input id="limiter" type="checkbox" checked> Use output safety ceiling</label>
+    <label>Ceiling <input id="ceiling" type="number" min="-12" max="0" step="0.5" value="-1"> dBFS</label>
+  </section>
+  <section class="card">
+    <h2>Experimental modules</h2>
+    <p>These controls are intentionally off in the prototype. They must pass listening and artifact tests before an MVP can expose them as normal features.</p>
+    <label><input id="bass" type="checkbox"> Psychoacoustic bass enhancement</label>
+    <label><input id="crossfeed" type="checkbox"> Headphone crossfeed</label>
+    <label><input id="loudness" type="checkbox"> Conservative loudness mode</label>
+  </section>
+  <section class="card">
+    <h2>Diagnostics</h2>
+    <p>Expected first route: source-level Web Audio processing attached to the active YouTube media element. Tab capture is not part of this prototype because it adds permission and lifecycle complexity.</p>
+    <button id="save">Save local settings</button>
+    <span id="saved"></span>
+  </section>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+{
+  "sampleRate": 48000,
+  "eqBands": [
+    31,
+    62,
+    125,
+    250,
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    16000
+  ],
+  "flatResponse": [
+    {
+      "frequency": 31,
+      "inputRmsDb": -14.981384137736256,
+      "outputRmsDb": -14.981384137736256,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 62,
+      "inputRmsDb": -15.02971211084773,
+      "outputRmsDb": -15.02971211084773,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 125,
+      "inputRmsDb": -15.051499821533236,
+      "outputRmsDb": -15.051499821533236,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 250,
+      "inputRmsDb": -15.05149984785086,
+      "outputRmsDb": -15.05149984785086,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 500,
+      "inputRmsDb": -15.051499834802446,
+      "outputRmsDb": -15.051499834802446,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 1000,
+      "inputRmsDb": -15.051499865875787,
+      "outputRmsDb": -15.051499865875787,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 2000,
+      "inputRmsDb": -15.051499885991257,
+      "outputRmsDb": -15.051499885991257,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 4000,
+      "inputRmsDb": -15.05149986114681,
+      "outputRmsDb": -15.05149986114681,
+      "responseDb": 0,
+      "peak": 0.25
+    },
+    {
+      "frequency": 8000,
+      "inputRmsDb": -15.051499939094564,
+      "outputRmsDb": -15.051499939094564,
+      "responseDb": 0,
+      "peak": 0.21650634706020355
+    },
+    {
+      "frequency": 16000,
+      "inputRmsDb": -15.051499939094564,
+      "outputRmsDb": -15.051499939094564,
+      "responseDb": 0,
+      "peak": 0.21650634706020355
+    }
+  ],
+  "vocalResponse": [
+    {
+      "frequency": 31,
+      "inputRmsDb": -14.981384137736256,
+      "outputRmsDb": -14.976284153467958,
+      "responseDb": 0.005099984268298385,
+      "peak": 0.25014808773994446
+    },
+    {
+      "frequency": 62,
+      "inputRmsDb": -15.02971211084773,
+      "outputRmsDb": -15.009135129182782,
+      "responseDb": 0.020576981664946814,
+      "peak": 0.25059521198272705
+    },
+    {
+      "frequency": 125,
+      "inputRmsDb": -15.051499821533236,
+      "outputRmsDb": -14.966683591417425,
+      "responseDb": 0.08481623011581085,
+      "peak": 0.2524946331977844
+    },
+    {
+      "frequency": 250,
+      "inputRmsDb": -15.05149984785086,
+      "outputRmsDb": -14.697032300410617,
+      "responseDb": 0.3544675474402421,
+      "peak": 0.2604134678840637
+    },
+    {
+      "frequency": 500,
+      "inputRmsDb": -15.051499834802446,
+      "outputRmsDb": -13.401814336518623,
+      "responseDb": 1.649685498283823,
+      "peak": 0.32244548201560974
+    },
+    {
+      "frequency": 1000,
+      "inputRmsDb": -15.051499865875787,
+      "outputRmsDb": -9.051499868974469,
+      "responseDb": 5.999999996901318,
+      "peak": 0.49881666898727417
+    },
+    {
+      "frequency": 2000,
+      "inputRmsDb": -15.051499885991257,
+      "outputRmsDb": -13.414248558236768,
+      "responseDb": 1.6372513277544893,
+      "peak": 0.3462599813938141
+    },
+    {
+      "frequency": 4000,
+      "inputRmsDb": -15.05149986114681,
+      "outputRmsDb": -14.712013278052844,
+      "responseDb": 0.33948658309396684,
+      "peak": 0.2850930988788605
+    },
+    {
+      "frequency": 8000,
+      "inputRmsDb": -15.051499939094564,
+      "outputRmsDb": -14.981525095738641,
+      "responseDb": 0.06997484335592219,
+      "peak": 0.24172115325927734
+    },
+    {
+      "frequency": 16000,
+      "inputRmsDb": -15.051499939094564,
+      "outputRmsDb": -15.043810273766843,
+      "responseDb": 0.007689665327720974,
+      "peak": 0.22519223392009735
+    }
+  ],
+  "safety": {
+    "overloadedPeakBefore": 2.0095090866088867,
+    "limitedPeakAfter": 0.8912509083747864,
+    "limiterScale": 0.4435167494752468,
+    "limitedPeakDb": -1.0000002900227403
+  },
+  "loudnessProxy": {
+    "sourceWindowDb": [
+      -4.948500199491272,
+      -4.948500199491272,
+      -4.948500199491272,
+      -4.948500199491272
+    ],
+    "enhancedWindowDb": [
+      -15.847415732688013,
+      -15.852703353032279,
+      -15.852703353032279,
+      -15.852703353032279
+    ]
+  },
+  "bassEnhancer": {
+    "inputPeak": 0.20000000298023224,
+    "outputPeak": 0.22877202928066254,
+    "addedPeak": 0.028772026300430298
+  },
+  "crossfeed": {
+    "directLeft": 0.800000011920929,
+    "delayedRight": 0.20000000298023224
+  }
+}
