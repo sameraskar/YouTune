@@ -1,20 +1,26 @@
 from pathlib import Path
-from PIL import Image, ImageDraw
+from PIL import Image
 
-root = Path(__file__).resolve().parents[1] / 'prototype' / 'icons'
-root.mkdir(parents=True, exist_ok=True)
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "assets" / "youtune-icon-source.png"
+OUTPUT = ROOT / "prototype" / "icons"
+SIZES = (16, 48, 128)
 
-for size in (16, 48, 128):
-    image = Image.new('RGBA', (size, size), (15, 20, 27, 255))
-    draw = ImageDraw.Draw(image)
-    margin = max(1, size // 10)
-    draw.rounded_rectangle((margin, margin, size - margin - 1, size - margin - 1), radius=max(2, size // 6), fill=(54, 123, 218, 255))
-    center = size // 2
-    amplitude = max(2, size // 5)
-    points = []
-    for x in range(max(1, size - 2 * margin)):
-        phase = (x / max(1, size - 2 * margin)) * 6.283185307
-        y = center + int(amplitude * __import__('math').sin(phase * 2.0))
-        points.append((margin + x, y))
-    draw.line(points, fill=(255, 255, 255, 255), width=max(1, size // 16), joint='curve')
-    image.save(root / f'icon{size}.png')
+
+def main() -> None:
+    if not SOURCE.exists():
+        raise SystemExit(f"Missing icon source: {SOURCE}")
+
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    with Image.open(SOURCE) as image:
+        source = image.convert("RGBA")
+        if source.width != source.height:
+            raise SystemExit("The YouTune icon source must be square")
+        for size in SIZES:
+            rendered = source.resize((size, size), Image.Resampling.LANCZOS)
+            rendered.save(OUTPUT / f"icon{size}.png", format="PNG", optimize=True)
+            print(f"Wrote {OUTPUT / f'icon{size}.png'}")
+
+
+if __name__ == "__main__":
+    main()
