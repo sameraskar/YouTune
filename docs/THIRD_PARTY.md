@@ -4,7 +4,7 @@ This document records open-source projects that informed YouTune's design and th
 
 ## Summary
 
-The current YouTune browser package does not bundle third-party runtime JavaScript, WebAssembly, headphone measurements, headphone target data, headphone result profiles, impulse responses, or copied third-party assets. The active audio graph uses the browser's native Web Audio API.
+The current YouTune browser package does not bundle third-party runtime JavaScript, WebAssembly, headphone measurements, headphone target data, headphone result profiles, impulse responses, or copied assets from the open-source projects listed below. The active audio graph uses the browser's native Web Audio API. The package does include YouTune branding artwork supplied for this project; its separate provenance and rights conditions are recorded in [`assets/ARTWORK-NOTICE.md`](../assets/ARTWORK-NOTICE.md).
 
 The projects below are **research references**, not current YouTune dependencies. Their repositories and licenses were checked before they were named here. If a future release bundles or links one of them as a runtime dependency, this document must be updated with the exact version, files, license notice, source obligations, and distribution details.
 
@@ -29,6 +29,10 @@ License file: [COPYING.txt](https://github.com/grame-cncm/faustwasm/blob/master/
 Why it matters: FaustWasm demonstrates a route from Faust DSP code to WebAssembly and WebAudio nodes. It is a candidate for future specialized processing if YouTune needs more advanced effects than native Web Audio nodes can provide.
 
 Current status: FaustWasm is not a YouTune dependency. No Faust source, generated WASM, wrapper code, or compiled artifact is bundled in the current extension. Any future use must comply with the exact LGPL terms that apply to the selected version and its distribution model.
+
+### Supplied YouTune branding artwork
+
+The icon source and derived browser sizes are project branding assets supplied for YouTune. They are not from EffeTune, FaustWasm, AutoEq, or another open-source runtime project. The publisher must confirm the right to reproduce and distribute them before store submission. See [`assets/ARTWORK-NOTICE.md`](../assets/ARTWORK-NOTICE.md).
 
 ### AutoEq
 

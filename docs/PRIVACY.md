@@ -22,4 +22,4 @@ If a future version adds analytics, cloud synchronization, account features, rem
 
 ## Contact
 
-For questions or security reports, use the contact method published in the repository or store listing. Replace this paragraph with a maintained support email or GitHub Issues URL before store submission.
+For questions, bug reports, or security reports, use the YouTune GitHub Issues page: https://github.com/sameraskar/YouTune/issues. Do not include private account credentials, personal data, or audio recordings in an issue.

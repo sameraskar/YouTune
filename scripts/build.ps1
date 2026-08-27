@@ -15,9 +15,15 @@ node --check (Join-Path $RootDir 'prototype\options.js')
 node (Join-Path $RootDir 'prototype\validate-extension.mjs')
 node (Join-Path $RootDir 'lab\test-dsp.mjs')
 
-Copy-Item (Join-Path $RootDir 'prototype\*') $PackageDir -Recurse -Force
-Copy-Item (Join-Path $RootDir 'README.md') $PackageDir -Force
-Copy-Item (Join-Path $RootDir 'LICENSE') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\manifest.json') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\background.js') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\content.js') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\popup.html') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\popup.js') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\presets.js') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\options.html') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\options.js') $PackageDir -Force
+Copy-Item (Join-Path $RootDir 'prototype\icons') $PackageDir -Recurse -Force
 Compress-Archive -Path (Join-Path $PackageDir '*') -DestinationPath $ZipPath -Force
 Remove-Item $PackageDir -Recurse -Force
 Write-Output "Built $ZipPath"

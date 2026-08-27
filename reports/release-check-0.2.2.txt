@@ -1,0 +1,5 @@
+
+> youtune@0.2.2 release-check
+> node scripts/release-check.mjs
+
+YouTune 0.2.2 release checks passed: 12 runtime package entries

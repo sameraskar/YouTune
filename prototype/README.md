@@ -1,42 +1,32 @@
-# YouTune prototype
+# YouTune extension source
 
-This is the first Manifest V3 technical prototype for YouTune, the privacy-first personal listening tuner for YouTube and YouTube Music.
+This directory contains the release source for **YouTune - Personal Listening Tuner**, a Manifest V3 browser extension for YouTube and YouTube Music.
 
-## What is implemented
+## What is active in this release
 
-The prototype contains a YouTube-only content script that discovers the active media element, attaches a source-level Web Audio graph, applies a 10-band graphic EQ, preamp gain, analyser, and basic dynamics safety stage, then reconnects when YouTube replaces the media element or finishes a single-page navigation. A popup provides quick controls, presets, bypass, reset, and reconnect. An options page stores local safety and experimental-module flags.
+The extension attaches a local Web Audio graph to the active YouTube media element. It provides a 10-band graphic equalizer, preamp control, 16 named listening presets, custom slider curves, bypass, reset, and reconnect support after a YouTube player change.
 
-The prototype intentionally does not use `tabCapture`, does not upload audio, does not require an account, and does not enable psychoacoustic bass enhancement, crossfeed, or loudness mode in the active audio path.
+YouTune does not require an account, upload audio, use microphone access, or use tab capture. Settings remain in local extension storage. The extension is independent and is not affiliated with or endorsed by YouTube or Google.
 
-## Load locally in Chrome or Edge
+## Load locally
 
-1. Open the browser's extension management page.
+1. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
 2. Enable Developer mode.
 3. Choose **Load unpacked**.
 4. Select this `prototype` directory.
-5. Open a YouTube or YouTube Music page, start playback, and open the YouTune popup.
-6. If the player was already active before the extension loaded, use **Reconnect**.
+5. Open YouTube or YouTube Music, start playback, and open the YouTune popup.
+6. If playback was already active before loading the extension, use **Reconnect**.
 
-## Validation performed
+## Release scope and limitations
 
-The following automated checks pass in the sandbox:
+The current release ships the equalizer, preamp, presets, bypass, and recovery controls. It does not ship headphone-correction profiles, psychoacoustic bass enhancement, crossfeed, loudness normalization, or a production-grade look-ahead limiter. Those ideas remain outside the active release until they have separate listening, performance, safety, and licensing evidence.
 
-```text
-node --check background.js
-node --check content.js
-node --check popup.js
-node --check options.js
-node validate-extension.mjs
-```
+The output safety stage is a conservative compressor and ceiling baseline. It must not be described as hearing protection, guaranteed clipping prevention, mastering-grade limiting, or standards-compliant loudness normalization.
 
-The validator checks Manifest V3, the YouTube-only host permissions, required files, media-element attachment, lifecycle observation, reconnect support, local storage, and popup-to-content messaging.
+## Support
 
-## Known prototype limitations
+Questions, bug reports, and security reports belong at https://github.com/sameraskar/YouTune/issues.
 
-The current version is a technical spike, not a store-ready release. The extension has not yet been run inside a real Chrome and Edge profile against current YouTube and YouTube Music pages in this environment. Real-browser testing is still required for autoplay behavior, media-element replacement, cross-origin restrictions, browser restart persistence, Bluetooth output behavior, and service-worker lifecycle.
+## Licensing
 
-The output safety stage is a basic compressor/ceiling baseline, not a production-grade look-ahead limiter. The popup has only a small set of example presets. Headphone correction, profile import, standards-aware loudness measurement, and a validated WASM/AudioWorklet module remain future work after the prototype reliability gate.
-
-## Architectural decision
-
-The prototype validates the preferred source-level route first. If real-browser tests show that this route fails too often because of media-element replacement or YouTube player changes, the next experiment should test `tabCapture` separately rather than quietly adding broad permissions to the MVP.
+YouTune-authored source is released under the repository MIT license. Third-party projects are documented in `docs/THIRD_PARTY.md`. The repository's MIT license does not relicense third-party code, data, profiles, measurements, or artwork.

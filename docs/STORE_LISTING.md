@@ -12,9 +12,19 @@ A private 10-band equalizer with curated presets for YouTube and YouTube Music.
 
 YouTune gives you direct control over how YouTube and YouTube Music sound in your browser. Choose from 16 curated listening presets, adjust a 10-band equalizer, change the preamp, bypass processing, or reconnect after a player change.
 
-YouTune is designed for personal listening. Settings are stored locally in your browser profile. The current version does not require an account, upload audio, or use tab capture. It focuses on YouTube and YouTube Music rather than making broad claims about every website.
+YouTune is designed for personal listening. Settings are stored locally in your browser profile. The current version does not require an account, upload audio, or use tab capture. It focuses on YouTube and YouTube Music rather than making broad claims about every website. YouTune is an independent extension and is not affiliated with or endorsed by YouTube or Google.
 
 The first release includes Flat, Bass Boost, Bass Light, Treble Boost, Vocal, Speech, Rock, Pop, Classical, Jazz, Electronic, Hip-Hop, Metal, Acoustic, Late Night, and Laptop Speakers profiles. You can fine-tune any profile and create a Custom curve.
+
+## Store screenshot
+
+Use `assets/store-screenshots/youtune-popup-rock.png` as the first store screenshot or promotional preview. It shows the YouTune popup connected to a YouTube player, the Rock preset, the 10-band controls, processing toggle, preamp, and recovery controls. Replace or supplement this preview with a screenshot captured from the final extension in Chrome and Edge after live validation.
+
+## Support and privacy
+
+Support and security reports: https://github.com/sameraskar/YouTune/issues
+
+Privacy policy: https://github.com/sameraskar/YouTune/blob/main/docs/PRIVACY.md
 
 ## Suggested search terms
 

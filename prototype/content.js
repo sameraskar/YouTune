@@ -112,10 +112,14 @@
   function setBypass(bypass) {
     if (!state.filters.length || !state.gain) return;
     const enabled = !bypass && state.settings?.enabled !== false;
+    if (enabled) {
+      updateFilterCoefficients();
+      return;
+    }
     state.filters.forEach((filter) => {
-      filter.gain.value = enabled ? Number(filter.gain.value) : 0;
+      filter.gain.value = 0;
     });
-    state.gain.gain.value = enabled ? 10 ** (Number(state.settings?.preampDb ?? 0) / 20) : 1;
+    state.gain.gain.value = 1;
   }
 
   function disconnect() {

@@ -22,6 +22,7 @@ assert.match(source, /yt-navigate-finish/);
 assert.match(source, /disconnect\(\)/);
 assert.match(source, /YOUTUNE_RECONNECT/);
 assert.doesNotMatch(source, /fetch\s*\(|XMLHttpRequest|WebSocket|eval\s*\(/);
+assert.match(source, /if \(enabled\) \{\s*updateFilterCoefficients\(\);/s);
 
 const popup = fs.readFileSync(new URL('./popup.js', import.meta.url), 'utf8');
 assert.match(popup, /chrome\.storage\.local/);
@@ -38,5 +39,8 @@ const presets = fs.readFileSync(new URL('./presets.js', import.meta.url), 'utf8'
 const presetNames = [...presets.matchAll(/^\s{4}description:\s*['"]/gm)];
 assert.ok(presetNames.length >= 12, `expected at least 12 presets, found ${presetNames.length}`);
 assert.match(fs.readFileSync(new URL('./popup.html', import.meta.url), 'utf8'), /presets\.js/);
+const options = fs.readFileSync(new URL('./options.html', import.meta.url), 'utf8');
+assert.doesNotMatch(options, /id="(limiter|ceiling|bass|crossfeed|loudness|save)"/);
+assert.match(options, /No inactive experimental controls are exposed/);
 
 console.log(`YouTune extension structure validated with ${presetNames.length} presets`);

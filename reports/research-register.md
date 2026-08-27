@@ -146,3 +146,16 @@ The official AutoEq repository describes automatic headphone equalization from m
 
 [1]: https://github.com/grame-cncm/faustwasm "grame-cncm/faustwasm"
 [2]: https://github.com/jaakkopasanen/AutoEq "jaakkopasanen/AutoEq"
+
+
+## Release audit sources - Microsoft Edge Add-ons
+
+- Official publishing workflow: https://learn.microsoft.com/en-us/microsoft-edge/extensions/publish/publish-extension
+- Verified requirements: Edge requires a developer account, a ZIP containing the manifest and required assets, manifest review before upload, availability and market selection, properties and privacy declarations, permission justifications, remote-code declaration, data-use certification, privacy policy when required, per-language store listing details, search terms, and certification testing notes. The manifest name and description feed into the listing, and a short description is recommended.
+
+
+## Release audit sources - Microsoft Edge Add-ons policies
+
+The current Edge policy page emphasizes single purpose and accurate representation, stability and performance, no obfuscation, a compliant extension CSP, no malicious or unwanted code, testing availability, usability across supported platforms, a maintained privacy policy, least-privilege permissions, and secure handling of any user data. It also warns against bulk submissions of substantially identical extensions and requires that all permissions be essential and justified.
+
+- Official Edge Add-ons developer policies: https://learn.microsoft.com/en-us/legal/microsoft-edge/extensions/developer-policies

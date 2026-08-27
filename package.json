@@ -1,6 +1,6 @@
 {
   "name": "youtune",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "description": "Privacy-first audio equalizer and personal listening tuner for YouTube and YouTube Music.",
   "type": "module",
@@ -8,7 +8,8 @@
     "validate": "node --check prototype/background.js && node --check prototype/content.js && node --check prototype/popup.js && node --check prototype/options.js && node prototype/validate-extension.mjs",
     "test:lab": "node lab/test-dsp.mjs",
     "test": "npm run validate && npm run test:lab",
-    "build": "bash scripts/build.sh"
+    "build": "bash scripts/build.sh",
+    "release-check": "node scripts/release-check.mjs"
   },
   "engines": {
     "node": ">=20"

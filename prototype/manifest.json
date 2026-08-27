@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YouTune - Personal Listening Tuner",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A privacy-first 10-band audio equalizer with 16 local listening presets for YouTube and YouTube Music.",
   "permissions": ["storage"],
   "host_permissions": ["https://www.youtube.com/*", "https://music.youtube.com/*"],

@@ -16,7 +16,7 @@ The product should not be presented as “just another equalizer.” Its intende
 
 The popup currently includes **16 curated presets**: Flat, Bass Boost, Bass Light, Treble Boost, Vocal, Speech, Rock, Pop, Classical, Jazz, Electronic, Hip-Hop, Metal, Acoustic, Late Night, and Laptop Speakers. Each preset contains a 10-band curve, a short description, and a recommended headroom value.
 
-Selecting a preset changes the tone curve but does **not** silently change the user's preamp. This is intentional. The first version of the expanded preset system automatically applied a lower preamp when a preset was selected, which made the effect feel weaker. YouTune version 0.2.1 removes that behavior and migrates old version 1 settings back to neutral preamp for named presets. Users can still adjust preamp manually.
+Selecting a preset changes the tone curve but does **not** silently change the user's preamp. This is intentional. The first version of the expanded preset system automatically applied a lower preamp when a preset was selected, which made the effect feel weaker. YouTune version 0.2.2 removes that behavior and migrates old version 1 settings back to neutral preamp for named presets. Users can still adjust preamp manually.
 
 Other current features include a 10-band graphic equalizer, preamp control, enable and disable processing, bypass, reset, reconnect, versioned local settings, a conservative safety-dynamics baseline, an options page, and a status channel for media discovery and connection errors.
 
@@ -83,7 +83,7 @@ prototype/                 Manifest V3 extension source
   validate-extension.mjs   Structural, preset, and permission-boundary checks
 lab/                       Deterministic DSP laboratory
 reports/                   Research, benchmark, reliability, and evaluation reports
-docs/                      Publishing, privacy, store-listing, and third-party disclosure documentation
+docs/                      Publishing, privacy, store-listing, third-party, and release-checklist documentation
 scripts/                   Linux/macOS and Windows packaging scripts
 .github/workflows/         GitHub Actions validation workflow
 package.json               Reproducible local validation commands
@@ -99,16 +99,17 @@ The prototype has no third-party runtime npm dependency. Node.js is used for syn
 npm test
 npm run validate
 npm run test:lab
-npm run build -- 0.2.1
+npm run build -- 0.2.2
+npm run release-check
 ```
 
-The build creates `dist/youtune-0.2.1.zip` with `manifest.json` at the ZIP root. That ZIP is the browser-store package. The repository source itself should be uploaded to GitHub separately.
+The build creates `dist/youtune-0.2.2.zip` with `manifest.json` at the ZIP root. That ZIP is the browser-store package. Run `npm run release-check` after the build to verify the exact store contents. The repository source itself should be uploaded to GitHub separately.
 
 On Windows PowerShell:
 
 ```powershell
 npm test
-powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1 0.2.0
+powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1 0.2.2
 ```
 
 ## Load the extension locally
@@ -142,7 +143,7 @@ The current source stores equalizer values, preset selection, processing state, 
 The repository includes [`docs/PUBLISHING.md`](docs/PUBLISHING.md) and [`docs/STORE_LISTING.md`](docs/STORE_LISTING.md). The short version is:
 
 1. Run `npm test`.
-2. Build the ZIP with `npm run build -- 0.2.1` or the PowerShell build script.
+2. Build the ZIP with `npm run build -- 0.2.2` or the PowerShell build script.
 3. Load the unpacked `prototype` directory in Chrome and Edge.
 4. Complete the manual reliability matrix on live YouTube and YouTube Music.
 5. Upload the ZIP through the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) or the [Microsoft Edge Partner Center](https://partner.microsoft.com/dashboard/microsoftedge/overview).
