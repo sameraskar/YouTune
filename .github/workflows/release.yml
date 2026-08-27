@@ -94,12 +94,12 @@ jobs:
             echo
             echo "## Latest commit"
             echo
-            git show -s --format='- Commit: `%H`%n- Subject: %s%n- Author: %an%n- Date: %ad' --date=iso-strict HEAD
+            git -c color.ui=false show -s --format='- Commit: `%H`%n- Subject: %s%n- Author: %an%n- Date: %ad' --date=iso-strict HEAD
             echo
             echo "Changed files in the latest commit:"
             echo
             printf '%s\n' '```text'
-            git show --stat --oneline --no-renames HEAD
+            git -c color.ui=false show --stat --oneline --no-renames HEAD
             printf '%s\n' '```'
             echo
             echo "## Commits included"
@@ -109,9 +109,9 @@ jobs:
               PREVIOUS_TAG="$(git describe --tags --abbrev=0 "${TAG}^")"
             fi
             if [[ -n "$PREVIOUS_TAG" ]]; then
-              git log --pretty=format:'- `%h` %s (%an)' "${PREVIOUS_TAG}..HEAD"
+              git -c color.ui=false log --pretty=format:'- `%h` %s (%an)' "${PREVIOUS_TAG}..HEAD"
             else
-              git log -n 25 --pretty=format:'- `%h` %s (%an)' HEAD
+              git -c color.ui=false log -n 25 --pretty=format:'- `%h` %s (%an)' HEAD
             fi
             echo
             echo
