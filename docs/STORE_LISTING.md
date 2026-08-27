@@ -10,11 +10,11 @@ A private 10-band equalizer with curated presets for YouTube and YouTube Music.
 
 ## Long description
 
-YouTune gives you direct control over how YouTube and YouTube Music sound in your browser. Choose from 16 curated listening presets, adjust a 10-band equalizer, change the preamp, bypass processing, or reconnect after a player change.
+YouTune gives you direct control over how YouTube and YouTube Music sound in your browser. Choose from 16 curated named listening presets, switch to the visible Custom profile while editing, adjust a 10-band equalizer, change the preamp, bypass processing, or reconnect after a player change.
 
 YouTune is designed for personal listening. Settings are stored locally in your browser profile. The current version does not require an account, upload audio, or use tab capture. It focuses on YouTube and YouTube Music rather than making broad claims about every website. YouTune is an independent extension and is not affiliated with or endorsed by YouTube or Google.
 
-The first release includes Flat, Bass Boost, Bass Light, Treble Boost, Vocal, Speech, Rock, Pop, Classical, Jazz, Electronic, Hip-Hop, Metal, Acoustic, Late Night, and Laptop Speakers profiles. You can fine-tune any profile and create a Custom curve.
+The first release includes 16 named profiles: Flat, Bass Boost, Bass Light, Treble Boost, Vocal, Speech, Rock, Pop, Classical, Jazz, Electronic, Hip-Hop, Metal, Acoustic, Late Night, and Laptop Speakers. You can fine-tune any profile; the selector visibly changes to Custom and preserves the edited curve.
 
 ## Store screenshot
 
@@ -35,7 +35,7 @@ YouTube equalizer, YouTube audio, YouTube Music equalizer, browser equalizer, 10
 1. Install the unpacked extension or submitted package.
 2. Open `https://www.youtube.com/` and start a video.
 3. Open YouTune and select Vocal, Bass Boost, or another preset.
-4. Move an EQ slider and confirm that the setting is applied without stopping playback.
+4. Move an EQ slider and confirm that the selector visibly changes to Custom, the setting is applied, and playback continues.
 5. Toggle Bypass and confirm that audio remains audible.
 6. Use Reconnect after navigating to another video.
 7. Open `https://music.youtube.com/`, play a track, and repeat the preset and navigation tests.

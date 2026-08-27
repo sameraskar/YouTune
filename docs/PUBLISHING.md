@@ -8,17 +8,17 @@ From the repository root on Linux or macOS:
 
 ```bash
 npm test
-npm run build -- 0.2.2
+npm run build -- 0.2.3
 ```
 
 On Windows PowerShell:
 
 ```powershell
 npm test
-powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1 0.2.2
+powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1 0.2.3
 ```
 
-The output is a ZIP under `dist/`. The store package contains only the runtime extension files, icons, and manifest required by the browser. Development validators, laboratory files, reports, source archives, and repository documentation are excluded. Upload the ZIP, not the repository root.
+The output is `dist/youtune-0.2.3.zip`. The store package contains only the runtime extension files, icons, and manifest required by the browser. Development validators, laboratory files, reports, source archives, and repository documentation are excluded. Upload the ZIP, not the repository root.
 
 ## 2. Test before submission
 

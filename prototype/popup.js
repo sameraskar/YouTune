@@ -54,7 +54,7 @@ function renderBands() {
     wrapper.querySelector('input').addEventListener('input', (event) => {
       settings.eqGainsDb[index] = Number(event.target.value);
       settings.preset = 'Custom';
-      presetEl.value = '';
+      presetEl.value = 'Custom';
       wrapper.querySelector('.db').textContent = `${settings.eqGainsDb[index]} dB`;
       updatePresetDescription();
       persistAndBroadcast();
@@ -67,7 +67,7 @@ function render() {
   enabledEl.checked = settings.enabled;
   preampEl.value = settings.preampDb;
   preampValueEl.textContent = `${settings.preampDb} dB`;
-  presetEl.value = PRESETS[settings.preset] ? settings.preset : '';
+  presetEl.value = settings.preset === 'Custom' || PRESETS[settings.preset] ? settings.preset : '';
   updatePresetDescription();
   renderBands();
 }
@@ -84,6 +84,13 @@ function persistAndBroadcast() {
 }
 
 function applyPreset(name) {
+  if (name === 'Custom') {
+    settings.preset = 'Custom';
+    render();
+    persistAndBroadcast();
+    setStatus('Custom curve selected. Adjust the sliders to shape it.', 'good');
+    return;
+  }
   const preset = PRESETS[name];
   if (!preset) return;
   settings.preset = name;

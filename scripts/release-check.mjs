@@ -22,11 +22,14 @@ assert.ok(listing.includes('https://github.com/sameraskar/YouTune/issues'));
 assert.ok(listing.includes('https://github.com/sameraskar/YouTune/blob/main/docs/PRIVACY.md'));
 assert.match(listing, /not affiliated with or endorsed by YouTube or Google/i);
 assert.ok(listing.includes('assets/store-screenshots/youtune-popup-rock.png'));
+assert.match(listing, /16 named profiles/i);
+assert.match(listing, /selector visibly changes to Custom/i);
 
 const publish = read('docs/PUBLISHING.md');
 assert.ok(publish.includes(`npm run build -- ${packageJson.version}`));
 assert.ok(publish.includes(`build.ps1 ${packageJson.version}`));
 assert.equal(/0\.2\.[01]/.test(publish), false);
+assert.equal(packageJson.version, '0.2.3', 'this release package must be version 0.2.3');
 
 const options = read('prototype/options.html');
 assert.doesNotMatch(options, /id="(limiter|ceiling|bass|crossfeed|loudness|save)"/);

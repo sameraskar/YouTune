@@ -1,4 +1,4 @@
-# YouTune 0.2.2 release checklist
+# YouTune 0.2.3 release checklist
 
 This checklist is the final gate for the YouTune browser extension. It separates checks that are automated and completed from checks that require a person to use the extension in current Chrome and Edge builds.
 
@@ -29,8 +29,8 @@ Load the `prototype` directory unpacked in the latest stable Chrome and Edge ver
 |---|---|---|---|
 | YouTube video starts with YouTune already installed | [ ] | [ ] | Audio remains audible and the status becomes connected |
 | YouTube Music track starts with YouTune already installed | [ ] | [ ] | Audio remains audible and the status becomes connected |
-| Select each of the 16 presets | [ ] | [ ] | The tone changes and no preset silently lowers preamp |
-| Move each EQ slider | [ ] | [ ] | The preset changes to Custom and playback continues |
+| Select each of the 16 named presets | [ ] | [ ] | The tone changes and no preset silently lowers preamp |
+| Move each EQ slider | [ ] | [ ] | The visible selector changes to Custom and playback continues |
 | Disable and re-enable Processing | [ ] | [ ] | Audio remains audible and the EQ curve returns when re-enabled |
 | Use Bypass and then enable processing | [ ] | [ ] | Bypass is clean and the EQ curve returns afterward |
 | Use Reset | [ ] | [ ] | Flat values and normal preamp are restored |
@@ -48,11 +48,11 @@ Load the `prototype` directory unpacked in the latest stable Chrome and Edge ver
 - [ ] Confirm the GitHub privacy-policy URL is publicly readable.
 - [ ] Capture at least one screenshot from the final tested extension. The repository contains a promotional preview at `assets/store-screenshots/youtune-popup-rock.png`; replace it with a direct capture if the store or reviewer requires proof from the running extension.
 - [ ] Use `docs/STORE_LISTING.md` for the short description, long description, search terms, support URL, privacy URL, and certification notes.
-- [ ] Upload `dist/youtune-0.2.2.zip`, not the repository root.
+- [ ] Upload `dist/youtune-0.2.3.zip`, not the repository root.
 - [ ] Complete the Chrome Web Store Package, Store Listing, Privacy, Distribution, and Test instructions sections.
 - [ ] Complete the Edge Add-ons availability, properties, privacy, listing, language, search terms, and certification sections.
 - [ ] Do not claim universal website support, hearing improvement, guaranteed sound quality, LUFS normalization, lossless restoration, or a production-grade limiter.
 
 ## Release decision
 
-The extension is technically ready for owner-run browser validation when every automated item above is checked. It is store-submission ready only after the manual Chrome and Edge rows pass and the publisher confirms the artwork and support details.
+The Custom selector state was fixed in 0.2.3: slider edits now expose Custom as a visible option and retain the edited curve. The user reported that the broader Chrome, Edge, YouTube, and YouTube Music scenarios worked before this final patch; only the focused Custom behavior remains to be rechecked after reloading 0.2.3. The extension is technically ready for owner-run browser validation when every automated item above is checked. It is store-submission ready only after the manual Chrome and Edge rows pass and the publisher confirms the artwork and support details.

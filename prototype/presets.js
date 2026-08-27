@@ -83,4 +83,4 @@ const PRESETS = {
   },
 };
 
-const PRESET_NAMES = Object.keys(PRESETS);
+const PRESET_NAMES = [...Object.keys(PRESETS), 'Custom'];

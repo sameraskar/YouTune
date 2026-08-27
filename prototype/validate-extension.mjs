@@ -28,6 +28,9 @@ const popup = fs.readFileSync(new URL('./popup.js', import.meta.url), 'utf8');
 assert.match(popup, /chrome\.storage\.local/);
 assert.match(popup, /chrome\.tabs\.sendMessage/);
 assert.match(popup, /PRESET_NAMES/);
+assert.match(popup, /settings\.preset = 'Custom'/);
+assert.match(popup, /presetEl\.value = 'Custom'/);
+assert.match(popup, /name === 'Custom'/);
 assert.match(popup, /Switching presets leaves your current preamp unchanged/);
 assert.doesNotMatch(popup, /settings\.preampDb\s*=\s*preset\.preampDb/);
 
@@ -38,6 +41,7 @@ assert.match(background, /storedSettings\.version === 1/);
 const presets = fs.readFileSync(new URL('./presets.js', import.meta.url), 'utf8');
 const presetNames = [...presets.matchAll(/^\s{4}description:\s*['"]/gm)];
 assert.ok(presetNames.length >= 12, `expected at least 12 presets, found ${presetNames.length}`);
+assert.match(presets, /const PRESET_NAMES = \[\.\.\.Object\.keys\(PRESETS\), 'Custom'\]/);
 assert.match(fs.readFileSync(new URL('./popup.html', import.meta.url), 'utf8'), /presets\.js/);
 const options = fs.readFileSync(new URL('./options.html', import.meta.url), 'utf8');
 assert.doesNotMatch(options, /id="(limiter|ceiling|bass|crossfeed|loudness|save)"/);
