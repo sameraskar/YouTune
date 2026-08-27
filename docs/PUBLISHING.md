@@ -20,6 +20,12 @@ powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1 0.2.3
 
 The output is `dist/youtune-0.2.3.zip`. The store package contains only the runtime extension files, icons, and manifest required by the browser. Development validators, laboratory files, reports, source archives, and repository documentation are excluded. Upload the ZIP, not the repository root.
 
+## 1A. Manual GitHub Actions release
+
+The repository includes `.github/workflows/release.yml`. From the GitHub repository's **Actions** tab, choose **Build and publish release**, select **Run workflow**, and leave the version input blank to use the versions already committed in `package.json` and `prototype/manifest.json`. The workflow validates the source, builds the runtime package, runs the release checker, creates two clearly named copies of the same verified package, generates release notes from the selected commit history, and creates a GitHub release tagged `v<version>`.
+
+The workflow attaches `YouTune-<version>-Chrome-Chromium.zip` for Chrome and other Chromium-based stores, `YouTune-<version>-Microsoft-Edge.zip` for Edge, and `SHA256SUMS.txt`. The packages intentionally have equivalent contents because YouTune uses one Manifest V3 codebase for both browser families. The separate filenames reduce upload mistakes and make each store target explicit. The workflow also uploads a temporary Actions run artifact containing the ZIPs and release notes. It will stop if the requested version does not match the committed package and manifest versions, or if the release tag already exists.
+
 ## 2. Test before submission
 
 Load the `prototype` directory unpacked in both Chrome and Edge. Test YouTube and YouTube Music playback manually using `reports/reliability-test-matrix.md`. Do not submit while any scenario produces silence, duplicate audio, settings loss, or an unexplained permission request.

@@ -1,0 +1,151 @@
+name: Build and publish release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version; leave blank to use package.json"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build packages and create GitHub release
+    runs-on: ubuntu-latest
+    env:
+      REQUESTED_VERSION: ${{ inputs.version }}
+
+    steps:
+      - name: Check out the selected commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Resolve and verify release version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          PACKAGE_VERSION="$(node -p "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).version")"
+          VERSION="${REQUESTED_VERSION:-$PACKAGE_VERSION}"
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release version must use semantic versioning, received: $VERSION" >&2
+            exit 1
+          fi
+          if [[ "$VERSION" != "$PACKAGE_VERSION" ]]; then
+            echo "The requested version ($VERSION) does not match package.json ($PACKAGE_VERSION)." >&2
+            echo "Update package.json and prototype/manifest.json in a commit before releasing." >&2
+            exit 1
+          fi
+          if [[ "$(node -p "JSON.parse(require('fs').readFileSync('prototype/manifest.json', 'utf8')).version")" != "$VERSION" ]]; then
+            echo "prototype/manifest.json does not match package.json." >&2
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Run validation and tests
+        run: npm test
+
+      - name: Build the runtime package
+        run: npm run build -- "${{ steps.version.outputs.version }}"
+
+      - name: Run release checks
+        run: npm run release-check
+
+      - name: Prepare browser-store artifacts
+        shell: bash
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          SOURCE_ZIP="dist/youtune-${VERSION}.zip"
+          test -f "$SOURCE_ZIP"
+          cp "$SOURCE_ZIP" "release/YouTune-${VERSION}-Chrome-Chromium.zip"
+          cp "$SOURCE_ZIP" "release/YouTune-${VERSION}-Microsoft-Edge.zip"
+          sha256sum release/*.zip | tee release/SHA256SUMS.txt
+
+      - name: Generate release notes from the pushed commit history
+        shell: bash
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          set -euo pipefail
+          {
+            echo "# YouTune ${VERSION}"
+            echo
+            echo "This release was built from the manually selected GitHub Actions commit."
+            echo
+            echo "## Downloads"
+            echo
+            printf '%s\n' "- **Chrome and other Chromium browsers:** \`YouTune-${VERSION}-Chrome-Chromium.zip\`"
+            printf '%s\n' "- **Microsoft Edge:** \`YouTune-${VERSION}-Microsoft-Edge.zip\`"
+            echo
+            echo "The two store uploads are intentionally separate artifacts. YouTune uses the same Manifest V3 runtime for Chrome, Edge, and compatible Chromium browsers, so the package contents are equivalent; the filenames identify the intended store target."
+            echo
+            echo "## Latest commit"
+            echo
+            git show -s --format='- Commit: `%H`%n- Subject: %s%n- Author: %an%n- Date: %ad' --date=iso-strict HEAD
+            echo
+            echo "Changed files in the latest commit:"
+            echo
+            printf '%s\n' '```text'
+            git show --stat --oneline --no-renames HEAD
+            printf '%s\n' '```'
+            echo
+            echo "## Commits included"
+            echo
+            PREVIOUS_TAG=""
+            if git describe --tags --abbrev=0 "${TAG}^" >/dev/null 2>&1; then
+              PREVIOUS_TAG="$(git describe --tags --abbrev=0 "${TAG}^")"
+            fi
+            if [[ -n "$PREVIOUS_TAG" ]]; then
+              git log --pretty=format:'- `%h` %s (%an)' "${PREVIOUS_TAG}..HEAD"
+            else
+              git log -n 25 --pretty=format:'- `%h` %s (%an)' HEAD
+            fi
+            echo
+            echo
+            echo "## Verification"
+            echo
+            echo "- npm test: passed"
+            echo "- npm run build: passed"
+            echo "- npm run release-check: passed"
+            echo "- Runtime package contains only the extension files and 16, 48, and 128 pixel icons."
+          } > release-notes.md
+          cat release-notes.md
+
+      - name: Upload workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: YouTune-${{ steps.version.outputs.version }}-release-files
+          path: |
+            release/*.zip
+            release/SHA256SUMS.txt
+            release-notes.md
+
+      - name: Create the GitHub release and attach both ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          gh release create "$TAG" \
+            release/YouTune-${VERSION}-Chrome-Chromium.zip \
+            release/YouTune-${VERSION}-Microsoft-Edge.zip \
+            release/SHA256SUMS.txt \
+            --repo "${GITHUB_REPOSITORY}" \
+            --target "${GITHUB_SHA}" \
+            --title "YouTune ${VERSION}" \
+            --notes-file release-notes.md
