@@ -71,9 +71,8 @@ jobs:
           mkdir -p release
           SOURCE_ZIP="dist/youtune-${VERSION}.zip"
           test -f "$SOURCE_ZIP"
-          cp "$SOURCE_ZIP" "release/YouTune-${VERSION}-Chrome-Chromium.zip"
-          cp "$SOURCE_ZIP" "release/YouTune-${VERSION}-Microsoft-Edge.zip"
-          sha256sum release/*.zip | tee release/SHA256SUMS.txt
+          cp "$SOURCE_ZIP" "release/YouTune-${VERSION}.zip"
+          sha256sum "release/YouTune-${VERSION}.zip" | tee release/SHA256SUMS.txt
 
       - name: Generate release notes from the pushed commit history
         shell: bash
@@ -89,10 +88,9 @@ jobs:
             echo
             echo "## Downloads"
             echo
-            printf '%s\n' "- **Chrome and other Chromium browsers:** \`YouTune-${VERSION}-Chrome-Chromium.zip\`"
-            printf '%s\n' "- **Microsoft Edge:** \`YouTune-${VERSION}-Microsoft-Edge.zip\`"
+            printf '%s\n' "- **Chrome, Microsoft Edge, and other Chromium browsers:** \`YouTune-${VERSION}.zip\`"
             echo
-            echo "The two store uploads are intentionally separate artifacts. YouTune uses the same Manifest V3 runtime for Chrome, Edge, and compatible Chromium browsers, so the package contents are equivalent; the filenames identify the intended store target."
+            echo "This single ZIP is the common browser-store package. YouTune uses the same Manifest V3 runtime for Chrome, Edge, and compatible Chromium browsers, so separate browser-specific packages are unnecessary."
             echo
             echo "## Latest commit"
             echo
@@ -142,8 +140,7 @@ jobs:
           TAG: ${{ steps.version.outputs.tag }}
         run: |
           gh release create "$TAG" \
-            release/YouTune-${VERSION}-Chrome-Chromium.zip \
-            release/YouTune-${VERSION}-Microsoft-Edge.zip \
+            release/YouTune-${VERSION}.zip \
             release/SHA256SUMS.txt \
             --repo "${GITHUB_REPOSITORY}" \
             --target "${GITHUB_SHA}" \
